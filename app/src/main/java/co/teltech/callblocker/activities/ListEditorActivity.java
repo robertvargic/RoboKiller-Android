@@ -131,11 +131,12 @@ public class ListEditorActivity extends AppCompatActivity implements FilterListA
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(data != null){
+        super.onActivityResult(requestCode, resultCode, data);
+        if (data != null) {
             Uri uri = data.getData();
-            if(uri != null){
+            if (uri != null) {
                 Cursor c = getContentResolver().query(uri, new String[]{ContactsContract.CommonDataKinds.StructuredName.DISPLAY_NAME_PRIMARY, ContactsContract.CommonDataKinds.Phone.NUMBER}, null, null, null);
-                if((c != null) && c.moveToFirst()){
+                if ((c != null) && c.moveToFirst()) {
                     String contactName = c.getString(0);
                     String contactNumber = c.getString(1);
                     contactNumber = PhoneNumberUtils.stripSeparators(contactNumber);

@@ -1,8 +1,10 @@
 package co.teltech.callblocker.receivers;
 
+import android.Manifest;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
@@ -38,6 +40,8 @@ import co.teltech.callblocker.utils.PrefsUtils;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import static androidx.core.content.ContextCompat.checkSelfPermission;
 
 /**
  * Created by tomislavtusek on 16/08/2018.
@@ -76,7 +80,7 @@ public class CallBlockerReceiver extends BroadcastReceiver {
                                 endCall(context);
                                 saveCallToBlockedCallsList(context, incomingNumber);
                             } else if (checkNumberResponse.getNumberType().equalsIgnoreCase(ResponseConstants.NUMBER_TYPE_SUSPICIOUS)) {
-                                Toast toast = Toast.makeText(context,context.getString(R.string.toast_suspicious_call), Toast.LENGTH_LONG);
+                                Toast toast = Toast.makeText(context, context.getString(R.string.toast_suspicious_call), Toast.LENGTH_LONG);
                                 toast.setGravity(Gravity.CENTER, 0, 0);
                                 toast.show();
                                 saveCallToSuspiciousCallsList(context, incomingNumber);
@@ -102,7 +106,7 @@ public class CallBlockerReceiver extends BroadcastReceiver {
                                 endCall(context);
                                 saveCallToBlockedCallsList(context, incomingNumber);
                             } else if (checkNumberResponse.getNumberType().equalsIgnoreCase(ResponseConstants.NUMBER_TYPE_SUSPICIOUS)) {
-                                Toast toast = Toast.makeText(context,context.getString(R.string.toast_suspicious_call), Toast.LENGTH_LONG);
+                                Toast toast = Toast.makeText(context, context.getString(R.string.toast_suspicious_call), Toast.LENGTH_LONG);
                                 toast.setGravity(Gravity.CENTER, 0, 0);
                                 toast.show();
                                 saveCallToSuspiciousCallsList(context, incomingNumber);
@@ -172,7 +176,17 @@ public class CallBlockerReceiver extends BroadcastReceiver {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
             TelecomManager telecomManager = (TelecomManager) context.getSystemService(Context.TELECOM_SERVICE);
-            telecomManager.endCall();
+            if (checkSelfPermission(context, Manifest.permission.ANSWER_PHONE_CALLS) != PackageManager.PERMISSION_GRANTED) {
+                // TODO: Consider calling
+                //    Activity#requestPermissions
+                // here to request the missing permissions, and then overriding
+                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                //                                          int[] grantResults)
+                // to handle the case where the user grants the permission. See the documentation
+                // for Activity#requestPermissions for more details.
+                telecomManager.endCall();
+            }
+
         } else {
             TelephonyManager tm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
             try {
