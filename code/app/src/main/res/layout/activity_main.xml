@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbarStyle="outsideInset">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:clipToPadding="false">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:clipToPadding="false"
+            android:padding="10dp">
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/blockedCallsCard"
+                style="@style/CounterCard"
+                android:layout_marginRight="5dp"
+                android:onClick="openCallsList">
+
+                <LinearLayout
+                    style="@style/CounterCardContainer">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/label_total_blocked_calls"/>
+
+                    <TextView
+                        android:id="@+id/counterBlockedCalls"
+                        style="@style/CounterCardCounter"
+                        android:text="0"/>
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/suspiciousCallsCard"
+                style="@style/CounterCard"
+                android:layout_marginLeft="5dp"
+                android:onClick="openCallsList">
+
+                <LinearLayout
+                    style="@style/CounterCardContainer">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/label_total_suspicious_calls"/>
+
+                    <TextView
+                        android:id="@+id/counterSuspiciousCalls"
+                        style="@style/CounterCardCounter"
+                        android:text="0"/>
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+        </LinearLayout>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:orientation="vertical"
+                android:animateLayoutChanges="true">
+
+                <Switch
+                    android:id="@+id/switchBlockCalls"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:text="@string/label_filter_calls" />
+
+                <LinearLayout
+                    android:id="@+id/filterOptionsContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="5dp">
+
+                    <RadioGroup
+                        android:id="@+id/radioOptionGroup"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:animateLayoutChanges="true">
+
+                        <RadioButton
+                            android:id="@+id/radioOptionSpamOnly"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/label_filter_spam_only"
+                            android:checked="true"/>
+
+                        <RadioButton
+                            android:id="@+id/radioOptionNotContacts"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/label_filter_not_in_contacts"/>
+
+                        <RadioButton
+                            android:id="@+id/radioOptionBlacklist"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/label_filter_blacklist"/>
+
+                        <Button
+                            android:id="@+id/buttonEditBlacklist"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="30dp"
+                            android:layout_marginRight="30dp"
+                            android:text="@string/button_edit_blacklist"
+                            android:visibility="gone"
+                            android:background="@drawable/black_white_list_button"
+                            android:textColor="@color/blackListWhiteListButtonText"
+                            android:onClick="openListEditor"/>
+
+                        <RadioButton
+                            android:id="@+id/radioOptionWhitelist"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/label_filter_whitelist"/>
+
+                        <Button
+                            android:id="@+id/buttonEditWhitelist"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="30dp"
+                            android:layout_marginRight="30dp"
+                            android:text="@string/button_edit_whitelist"
+                            android:visibility="gone"
+                            android:background="@drawable/black_white_list_button"
+                            android:textColor="@color/blackListWhiteListButtonText"
+                            android:layout_marginBottom="10dp"
+                            android:onClick="openListEditor"/>
+
+                    </RadioGroup>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+    </LinearLayout>
+
+</ScrollView>

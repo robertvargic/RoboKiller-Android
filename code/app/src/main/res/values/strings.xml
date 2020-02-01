@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">Call Blocker</string>
+
+    <string name="label_filter_calls">Filter Calls</string>
+    <string name="label_filter_spam_only">Filter spam calls ONLY</string>
+    <string name="label_filter_not_in_contacts">Filter calls from callers NOT in my Contact list</string>
+    <string name="label_filter_blacklist">Filter calls using a Blacklist</string>
+    <string name="label_filter_whitelist">Filter calls using a Whitelist</string>
+    <string name="label_total_blocked_calls">Total blocked calls</string>
+    <string name="label_total_suspicious_calls">Total suspicious calls</string>
+
+    <string name="label_empty_contacts_list">There are no Contacts in the list.</string>
+    <string name="label_empty_calls_list">There are no Calls in the list.</string>
+
+    <string name="menu_item_add_contact">Add Contact</string>
+    <string name="menu_empty_list">Empty list</string>
+
+    <string name="activity_title_blacklist">Blacklist</string>
+    <string name="activity_title_whitelist">Whitelist</string>
+    <string name="activity_title_blocked_calls">Blocked calls</string>
+    <string name="activity_title_suspicious_calls">Suspicious calls</string>
+
+    <string name="alert_title_info">Info</string>
+    <string name="alert_button_ok">OK</string>
+
+    <string name="button_edit_blacklist">Edit Blacklist</string>
+    <string name="button_edit_whitelist">Edit Whitelist</string>
+
+    <string name="toast_suspicious_call">Beware! Suspicious caller.</string>
+    <string name="toast_blocking_call">Blocking this call</string>
+
+</resources>

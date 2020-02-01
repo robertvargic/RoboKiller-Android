@@ -1,0 +1,4 @@
+<resources>
+    <dimen name="btn_corner_radius">30dp</dimen>
+    <dimen name="rounded_btn_stroke">1dp</dimen>
+</resources>

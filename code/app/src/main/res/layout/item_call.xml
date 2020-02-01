@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp">
+
+    <TextView
+        android:id="@+id/labelCallNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:layout_marginRight="30dp"
+        android:text="Number"/>
+
+    <TextView
+        android:id="@+id/labelCallDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/labelCallNumber"
+        android:textSize="14sp"
+        android:layout_marginRight="30dp"
+        android:text="Date"/>
+
+</RelativeLayout>
