@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1062004079677",
+    "firebase_url": "https://robokiller.firebaseio.com",
+    "project_id": "robokiller",
+    "storage_bucket": "robokiller.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1062004079677:android:3215e562d009508a017e54",
+        "android_client_info": {
+          "package_name": "co.teltech.callblocker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1062004079677-odui38ed40d7ua8etpn0cuo44gq69jci.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCMtN1ZBLJ4zE7N-MizzRt0Y4i3i9_GBRM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1062004079677-odui38ed40d7ua8etpn0cuo44gq69jci.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
