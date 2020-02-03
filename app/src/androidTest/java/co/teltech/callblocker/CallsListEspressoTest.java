@@ -11,7 +11,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import co.teltech.callblocker.activities.MainActivity;
+import co.teltech.callblocker.activities.CallsListActivity;
 
 import static androidx.test.InstrumentationRegistry.getTargetContext;
 import static androidx.test.espresso.Espresso.onView;
@@ -26,10 +26,11 @@ import static org.hamcrest.CoreMatchers.not;
 
 @RunWith(AndroidJUnit4ClassRunner.class)
 @LargeTest
-public class MainActivityEspressoTest {
+public class CallsListEspressoTest {
+
     @Rule
-    public ActivityTestRule<MainActivity> activityTestRule =
-            new ActivityTestRule<>(MainActivity.class);
+    public ActivityTestRule<CallsListActivity> activityTestRule =
+            new ActivityTestRule<>(CallsListActivity.class);
 
     @Before
     public void grantPermission() {
@@ -120,4 +121,6 @@ public class MainActivityEspressoTest {
 
         onView(withId(R.id.switchBlockCalls)).perform(click());
     }
+
+
 }
