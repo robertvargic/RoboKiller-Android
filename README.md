@@ -1,29 +1,38 @@
 # CallBlockerAndroid
 
 
-#### Testing
+### Testing
 
-Detailed info can be found on: https://developer.android.com/training/testing/espresso
+Detailed info can be found on: [Esspresso Documentation](https://developer.android.com/training/testing/espresso)
 
 Dependencies needed for the implementation:
 
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-    androidTestImplementation 'androidx.test:runner:1.2.0'
-    androidTestImplementation 'androidx.test:rules:1.2.0'
+```
+androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+androidTestImplementation 'androidx.test:runner:1.2.0'
+androidTestImplementation 'androidx.test:rules:1.2.0'
+androidTestImplementation 'androidx.test.espresso:espresso-intents:3.1.0'
+```
 
 This needs to be added inside android.defaultConfig
     testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-    
-    upgrade to androidX to be compactible with the libraries required by firebase. This also made
-    project up to date with latest technologies and practices used.
+```    
+upgrade to androidX to be compactible with the libraries required by firebase. This also made
+project up to date with latest technologies and practices used.
+```
      
-All testing .java files are inside and should be inside src/androidTest/java/co.teltech.callblocker
+All testing .java files are inside and should be inside 
+```
+src/androidTest/java/co.teltech.callblocker
+````
+
+# Firebase + Bitrise Implementation
+
+Explained in the steps below is the complete integration of the Firebase with the Bitrise
 
 ## Firebase implementation
 
-Detailed info can be found on: https://firebase.google.com/docs/android/setup
-
-# Firebase test lab
+Detailed info can be found on: [Firebase Documentaiton](https://firebase.google.com/docs/android/setup)
 
 APK or ABB and Test APK needs to be created to create Instrumented test inside Test lab. Those can
 be uploaded trough web UI.
@@ -32,16 +41,20 @@ From there, virtual or real device can be selected.
 
 ## Bitrise
 
-Adding app to the bitrise is pretty straightforward through the UI 
+Adding app to the Bitrise is pretty straightforward through the Bitrise UI
+
+Link to site: 
+
+[bitrise.io](https://www.bitrise.io/)
 
 ## Bitrise + Firebase Test Lab
 
 To implement Firebase tests te be done when Bitrise build is finished, few steps are needed.
 
 You need to install Firebase CLI, you could need it later in the process:
-https://firebase.google.com/docs/cli/#install-cli-mac-linux
+[Firebase CLI](https://firebase.google.com/docs/cli/#install-cli-mac-linux)
 
-#Setting up needed Google Cloud Platform permissions
+## Setting up needed Google Cloud Platform permissions
 
 API Access needs to be added from Google Cloud Platform APIs for implementation to work.
 Go to the project: https://console.cloud.google.com/projectselector2/apis/library?supportedpurview=project
@@ -49,16 +62,20 @@ Select needed project, and search and add following API access to the project:
 -Google Cloud Testing API 
 -Cloud Tool Results API
 
-#Setting up needed variables
+## Setting up needed variables
 
 Go to the "Code Signing" tab.
 You will need a Google Cloud Platform service account and its JSON key file.
-You can learn more about those on this link: https://cloud.google.com/compute/docs/access/service-accounts
+You can learn more about those on this link: 
 
-Needed JSON key file details can be found on this link: https://cloud.google.com/iam/docs/creating-managing-service-account-keys#iam-service-account-keys-create-console
+[Google service accounts docs](https://cloud.google.com/compute/docs/access/service-accounts)
 
-To get needed JSON key file, go to the link: 
-https://console.cloud.google.com/project/_/iam-admin
+Needed JSON key file details can be found on this link: 
+
+[Google service account keys](https://cloud.google.com/iam/docs/creating-managing-service-account-keys#iam-service-account-keys-create-console)
+
+To get needed JSON key file, go to the 
+[Google projects](https://console.cloud.google.com/project/_/iam-admin).
 After that, select project that you need access.
 
 On the navigation bar on the left side select "Service Accounts" tab.
@@ -78,12 +95,14 @@ contains the url will be: $BITRISEIO_SERVICE_ACCOUNT_KEY_URL
 Go to the "Env Vars" tab, and add "GCP_PROJECT" variable.
 This is to have Google Cloud Project key available.
 Format of that key is like this: "appname-123456"
-Key can be found on https://console.cloud.google.com/home/dashboard?project=<token-id> under Project info.
+Key can be found on https://console.cloud.google.com/home/dashboard?project=<**token-id**> under Project info.
+Replace **token-id** with your app id
 
 
-#Setting up "Android Build for UI Testing" workflow step
+## Setting up "Android Build for UI Testing" workflow step
 
-Go to the Bitrise and open workflow for the Android project. After "Android Unit Test"
+Go to the Bitrise and open workflow for the Android project. After 
+"Android Unit Test"
 step, add new step named: "Android Build for UI Testing"
 
 After that, return to the "Workflows tab" and go to the "Android Build for UI testing" step.
@@ -105,8 +124,8 @@ After you created "Android Build for UI Testing" workflow step, next step to add
 $BITRISE_APK_PATH and $BITRISE_TEST_APK_PATH to the Firebase.
 
 After that is created, use this script:
-
-            #!/bin/bash
+```
+ #!/bin/bash
             set -ex
 
             #Download service account key
@@ -141,11 +160,16 @@ After that is created, use this script:
                    f=$(echo ${file//$SRCPTH\/$RESULT_DIR\/})
                    mv $file $(echo $EXPPTH/${f//\//_})
                 fi
-            done
- 
+            done 
+```
  This script sends builds to Firebase, and after tests are performed, downloads test results, that are shown inside 
  the "APPS & ARTIFACTS" tab
 
+
+## End info
+
+After this steps are completed, create test build on Bitrise. When build is finished,
+go to the "APSS & ARTIFACTS", and there you should have test results from the Firebase.
 
 
 
