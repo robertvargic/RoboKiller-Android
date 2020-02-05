@@ -40,8 +40,6 @@ public class ListEditorActivityEspressoTest {
     public ActivityTestRule<ListEditorActivity> activityTestRule =
             new ActivityTestRule<>(ListEditorActivity.class, true, true);
 
-//    ContactHelper contactHelper = new ContactHelper(activityTestRule);
-
     @Rule
     public GrantPermissionRule mGrantPermissionRule =
             GrantPermissionRule.grant(
@@ -51,19 +49,28 @@ public class ListEditorActivityEspressoTest {
                     "android.permission.READ_PHONE_STATE",
                     "android.permission.ANSWER_PHONE_CALLS");
 
-    @Test
-    public void checkUIComponents() {
+    public void startWhitelistActivityWithIntent() {
+        Intent i = new Intent();
+        i.putExtra(ListEditorActivity.EXTRA_LIST_TYPE, ListEditorActivity.EXTRA_LIST_TYPE_WHITELIST);
+        activityTestRule.launchActivity(i);
+    }
+
+    public void startBlackListActivityWithIntent() {
         Intent i = new Intent();
         i.putExtra(ListEditorActivity.EXTRA_LIST_TYPE, ListEditorActivity.EXTRA_LIST_TYPE_BLACKLIST);
         activityTestRule.launchActivity(i);
+    }
+
+    @Test
+    public void checkWhitelistUIComponents() {
+        startWhitelistActivityWithIntent();
         onView(withId(R.id.emptyListLayout)).check(matches(isDisplayed()));
     }
 
     @Test
-    public void testContactPickerResult() {
-        Intent i = new Intent();
-        i.putExtra(ListEditorActivity.EXTRA_LIST_TYPE, ListEditorActivity.EXTRA_LIST_TYPE_BLACKLIST);
-        activityTestRule.launchActivity(i);
+    public void testWhitelistContactPickerResult() {
+        startWhitelistActivityWithIntent();
+
         Intents.init();
 
         Intent resultData = new Intent();
@@ -77,10 +84,43 @@ public class ListEditorActivityEspressoTest {
     }
 
 //    @Test
-    public void checkIfContactExistsInList() {
-        Intent i = new Intent();
-        i.putExtra(ListEditorActivity.EXTRA_LIST_TYPE, ListEditorActivity.EXTRA_LIST_TYPE_BLACKLIST);
-        activityTestRule.launchActivity(i);
+    //todo test with contact inside list
+    public void checkIfContactExistsInWhiteList() {
+        startWhitelistActivityWithIntent();
+
+
+        onView(allOf(withId(R.id.buttonRemoveContact),
+                childAtPosition(childAtPosition(withId(R.id.recyclerView), 0), 0),
+                isDisplayed())).perform(click());
+    }
+
+    @Test
+    public void checkBlacklistUIComponents() {
+        startWhitelistActivityWithIntent();
+        onView(withId(R.id.emptyListLayout)).check(matches(isDisplayed()));
+    }
+
+    @Test
+    public void testBlacklistContactPickerResult() {
+        startWhitelistActivityWithIntent();
+
+        Intents.init();
+
+        Intent resultData = new Intent();
+        resultData.putExtra("phone", "12345678");
+
+        Instrumentation.ActivityResult result = new Instrumentation.ActivityResult(Activity.RESULT_OK, resultData);
+
+        intending(toPackage("com.android.contacts")).respondWith(result);
+        Intents.release();
+
+    }
+
+    //    @Test
+    //todo test with contact inside list
+    public void checkIfContactExistsInBlackList() {
+        startWhitelistActivityWithIntent();
+
 
         onView(allOf(withId(R.id.buttonRemoveContact),
                 childAtPosition(childAtPosition(withId(R.id.recyclerView), 0), 0),
@@ -105,5 +145,4 @@ public class ListEditorActivityEspressoTest {
             }
         };
     }
-
 }
