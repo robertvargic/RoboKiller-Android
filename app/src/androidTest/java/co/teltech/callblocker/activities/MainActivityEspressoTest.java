@@ -1,7 +1,8 @@
-package co.teltech.callblocker;
+package co.teltech.callblocker.activities;
 
 import android.os.Build;
 
+import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.filters.LargeTest;
 import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner;
 import androidx.test.rule.ActivityTestRule;
@@ -11,7 +12,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import co.teltech.callblocker.activities.MainActivity;
+import co.teltech.callblocker.R;
 
 import static androidx.test.InstrumentationRegistry.getTargetContext;
 import static androidx.test.espresso.Espresso.onView;
@@ -20,13 +21,13 @@ import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isChecked;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
-import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static androidx.test.platform.app.InstrumentationRegistry.getInstrumentation;
 import static org.hamcrest.CoreMatchers.not;
 
 @RunWith(AndroidJUnit4ClassRunner.class)
 @LargeTest
 public class MainActivityEspressoTest {
+
     @Rule
     public ActivityTestRule<MainActivity> activityTestRule =
             new ActivityTestRule<>(MainActivity.class);
@@ -48,7 +49,7 @@ public class MainActivityEspressoTest {
 
     @Test
     public void checkUIComponents() {
-        onView(withText(R.string.label_filter_calls)).check(matches(isDisplayed()));
+        onView(ViewMatchers.withText(R.string.label_filter_calls)).check(matches(isDisplayed()));
         onView(withId(R.id.switchBlockCalls)).check(matches(isDisplayed()));
     }
 
