@@ -1,6 +1,22 @@
 # CallBlockerAndroid
 
 
+### Why Espresso?
+
+Main reasoning behind using Espresso is that it is created specifically for
+the android testing, and since it has access inside the application, Espresso
+knows how to use the code that actually runs the application for more 
+thorough testing of each element. Appium is also mentioned as open source solution
+that can be run on both platforms. Since no elements are named same in-between
+Android and iOS (my guess), it also requires writing of the two different sets of
+tests, Android and iOS one, so in the end, we get the two different tests.
+Unfortunatley, I didn't had time to present you with the Appium solution,
+but general how to is similar to the Espresso one, if not easier. 
+
+In the end, best practice is to have app covered with unit test, and afterwards to
+have rest covered by the UI test. Unfortunately, architecture of this application
+doesn't allow me unit test example but that one can be found on my github. 
+
 ### Testing
 
 Detailed info can be found on: [Esspresso Documentation](https://developer.android.com/training/testing/espresso)
